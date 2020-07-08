@@ -2,6 +2,7 @@ package naprimer.demo.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -27,16 +28,23 @@ public class Appointment {
 	@DateTimeFormat(pattern = "yyyy-MM-dd", iso = ISO.DATE)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate termin;// pocetak termina - "termin":"2020-04-04T16:00:00",
+	
 	@NotNull
-	@DateTimeFormat(pattern = "yyyy-MM-dd", iso = ISO.DATE) //"trajanje":"2020-04-04T16:00:00",
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-	private LocalDate trajanje;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+	private LocalTime pocetak;
+
+	@NotNull
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+	private LocalTime kraj;
+
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "company_id")
 	private Company company;
+	
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
+	
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "facility_id")
 	private Facility facility;
@@ -59,14 +67,6 @@ public class Appointment {
 
 	public void setTermin(LocalDate termin) {
 		this.termin = termin;
-	}
-
-	public LocalDate getTrajanje() {
-		return trajanje;
-	}
-
-	public void setTrajanje(LocalDate trajanje) {
-		this.trajanje = trajanje;
 	}
 
 	public Company getCompany() {
@@ -101,8 +101,20 @@ public class Appointment {
 		this.user = user;
 	}
 
+	public LocalTime getPocetak() {
+		return pocetak;
+	}
 
+	public void setPocetak(LocalTime pocetak) {
+		this.pocetak = pocetak;
+	}
 
+	public LocalTime getKraj() {
+		return kraj;
+	}
 
+	public void setKraj(LocalTime kraj) {
+		this.kraj = kraj;
+	}
 
 }

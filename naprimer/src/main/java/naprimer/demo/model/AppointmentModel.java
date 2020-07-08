@@ -1,12 +1,13 @@
 package naprimer.demo.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class AppointmentModel {
 	private Integer id;
 	private LocalDate termin;
-	private LocalDate trajanje;
+	private LocalTime pocetak;
+	private LocalTime kraj;
 	public Integer getId() {
 		return id;
 	}
@@ -19,13 +20,17 @@ public class AppointmentModel {
 	public void setTermin(LocalDate termin) {
 		this.termin = termin;
 	}
-	public LocalDate getTrajanje() {
-		return trajanje;
+	public LocalTime getPocetak() {
+		return pocetak;
 	}
-	public void setTrajanje(LocalDate trajanje) {
-		this.trajanje = trajanje;
+	public void setPocetak(LocalTime pocetak) {
+		this.pocetak = pocetak;
+	}
+	public LocalTime getKraj() {
+		return kraj;
+	}
+	public void setKraj(LocalTime kraj) {
+		this.kraj = kraj;
 	}
 
-	
-	
 }

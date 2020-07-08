@@ -17,13 +17,14 @@ import naprimer.demo.repository.AppointmentRepository;
 public class AppointmentServiceImplementation implements AppointmentService {
 	@Autowired
 	private AppointmentRepository appointmentRepository;
-
+/*Create, Update, Delete actions over Appointment*/
 	@Override
 	public AppointmentModel createAppointment(AppointmentModel model) {
 		Appointment appointment = new Appointment();
 		appointment.setId(model.getId());
 		appointment.setTermin(model.getTermin());
-		appointment.setTrajanje(model.getTrajanje());
+		appointment.setPocetak(model.getPocetak());
+		appointment.setKraj(model.getKraj());
 		appointmentRepository.save(appointment);
 		return appointmentToModel(appointment);
 	}
@@ -36,7 +37,8 @@ public class AppointmentServiceImplementation implements AppointmentService {
 		}
 		Appointment appointmentEntity = theAppointment.get();
 		appointmentEntity.setTermin(model.getTermin());
-		appointmentEntity.setTrajanje(model.getTrajanje());
+		appointmentEntity.setPocetak(model.getPocetak());
+		appointmentEntity.setKraj(model.getKraj());
 		appointmentRepository.save(appointmentEntity);
 		return appointmentToModel(appointmentEntity);
 	}
@@ -45,7 +47,9 @@ public class AppointmentServiceImplementation implements AppointmentService {
 	public void deleteAppointment(Integer appointmentId) {
 		appointmentRepository.deleteById(appointmentId);
 	}
-
+	
+	/*Get methods*/
+/*Facility*/
 	@Override
 	public List<AppointmentModel> getFacilityAppointments(Integer facilityId) {
 		List<Appointment> appointments = appointmentRepository.getFacilityAppointment(facilityId);
@@ -56,6 +60,7 @@ public class AppointmentServiceImplementation implements AppointmentService {
 		return models;
 	}
 
+/*Employee*/	
 	@Override
 	public List<AppointmentModel> getEmployeeAppointments(Integer employeeId) {
 		List<Appointment> appointments = appointmentRepository.getEmployeeAppointment(employeeId);
@@ -72,7 +77,7 @@ public class AppointmentServiceImplementation implements AppointmentService {
 		return result;
 	}
 
-	/**/
+/*Company*/
 	@Override
 	public Integer getTotalCompanyAppointments(LocalDate termin1, LocalDate termin2, Integer companyId) {
 
@@ -80,7 +85,7 @@ public class AppointmentServiceImplementation implements AppointmentService {
 		return result;
 	}
 
-	/**/
+
 	@Override
 	public List<AppointmentModel> listTotalCompanyAppointments(LocalDate termin1, LocalDate termin2,
 			Integer companyId) {
@@ -93,13 +98,28 @@ public class AppointmentServiceImplementation implements AppointmentService {
 		return models;
 	}
 
-	/**/
+/*User*/
+	@Override
+	public List<AppointmentModel> getUsersAppointments(Integer userId) {
+		List<Appointment> theAppointments = appointmentRepository.getUsersAppointments(userId);
+		List<AppointmentModel> models = new ArrayList<>();
+		for (Appointment appointment : theAppointments) {
+			models.add(appointmentToModel(appointment));
+		}
+
+		return models;
+	}
+	
+	/*ToModel*/
 	private AppointmentModel appointmentToModel(Appointment appointment) {
 		AppointmentModel model = new AppointmentModel();
 		model.setId(appointment.getId());
 		model.setTermin(appointment.getTermin());
-		model.setTrajanje(appointment.getTrajanje());
+		model.setPocetak(appointment.getPocetak());
+		model.setKraj(appointment.getKraj());
 		return model;
 	}
+
+	
 
 }

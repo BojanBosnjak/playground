@@ -6,7 +6,7 @@ import naprimer.demo.model.AppointmentModel;
 
 public interface AppointmentService {
 	AppointmentModel createAppointment(AppointmentModel model);
-
+	
 	AppointmentModel updateAppointment(Integer appointmentId, AppointmentModel model);
 
 	void deleteAppointment(Integer appointmentId);
@@ -30,4 +30,8 @@ public interface AppointmentService {
 	public Integer getTotalCompanyAppointments(LocalDate termin1, LocalDate termin2, Integer companyId);
 
 	List<AppointmentModel> listTotalCompanyAppointments(LocalDate termin1, LocalDate termin2, Integer companyId);
+	
+	List <AppointmentModel> getUsersAppointments(Integer userId);
+	
+	
 }
