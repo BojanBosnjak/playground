@@ -42,19 +42,21 @@ public class AppointmentRestController {
 	}
 
 	/**/
-	@GetMapping("/appointment/getTotal/termin1/{termin1}/termin2/{termin2}/{companyId}")
+	@GetMapping("/company/{companyId}/apointments")
 	public Integer getTotalCompanyAppointments(
-			@PathVariable(value = "termin1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate termin1,
-			@PathVariable(value = "termin2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate termin2,
+			@RequestParam("termin1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate termin1,
+			@RequestParam("termin2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate termin2,
 			@PathVariable("companyId") Integer companyId) {
 		return appointmentService.getTotalCompanyAppointments(termin1, termin2, companyId);
 
 	}
-
+/*Princip metode iznad promeniti na metodu ispod i pronaci kako da ubacim i id-eve gde i sta radi, ko...*/
 	/**/
 	@GetMapping("/appointment/totalAppointments/{companyId}")
-	public List<AppointmentModel> listTotalCompanyAppointments(@PathVariable("termin1") LocalDate termin1,
-			@PathVariable("termin2") LocalDate termin2, @PathVariable("companyId") Integer companyId) {
+	public List<AppointmentModel> listTotalCompanyAppointments(
+			@RequestParam("termin1") LocalDate termin1,
+			@RequestParam("termin2") LocalDate termin2, 
+			@PathVariable("companyId") Integer companyId) {
 		return appointmentService.listTotalCompanyAppointments(termin1, termin2, companyId);
 
 	}

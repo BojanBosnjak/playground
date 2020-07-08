@@ -24,12 +24,12 @@ public class Appointment {
 	private Integer id;
 
 	@NotNull
-	@DateTimeFormat(pattern = "yyyy-MM-dd", iso = ISO.DATE)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd-MM-yyyy", iso = ISO.DATE)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate termin;// pocetak termina - "termin":"2020-04-04T16:00:00",
 	@NotNull
-	@DateTimeFormat(pattern = "yyyy-MM-dd", iso = ISO.DATE) //"trajanje":"2020-04-04T16:00:00",
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd-MM-yyyy", iso = ISO.DATE) //"trajanje":"2020-04-04T16:00:00",
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate trajanje;
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
 	@JoinColumn(name = "company_id")
