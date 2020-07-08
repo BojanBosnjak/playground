@@ -16,13 +16,13 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 	@Query(value = "select count(*) from appointment where employee_id=:employeeId", nativeQuery = true)
 	public Integer getTotalEmployeeAppointments(Integer employeeId);
 
-	@Query(value = "select count(*) from appointment where termin between termin1=?1 and termin2=?2 and company_id=?3", nativeQuery = true)
+	@Query(value = "select count(*) from appointment where termin between ?1 and ?2 and company_id=?3", nativeQuery = true)
 	public Integer getTotalCompanyAppointments(LocalDate termin1, LocalDate termin2, Integer companyId);
 	/*
 	 * Ova metoda vraca broj sastanaka koji su odrzani na nivou cele kompanije
 	 */
 
-	@Query(value = "select * from appointment where termin between termin1=?1 and termin2=?2 and company_id=?3", nativeQuery = true)
+	@Query(value = "select * from appointment where termin between ?1 and ?2 and company_id=?3", nativeQuery = true)
 	List<Appointment> listTotalCompanyAppointments(LocalDate termin1, LocalDate termin2, Integer companyId);
 	/*
 	 * Pitanje glasi, da li ja ova 3 parametra mogu ovako da saljem u query? Posto

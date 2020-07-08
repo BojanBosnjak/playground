@@ -54,8 +54,8 @@ public class AppointmentRestController {
 	/**/
 	@GetMapping("/appointment/totalAppointments/{companyId}")
 	public List<AppointmentModel> listTotalCompanyAppointments(
-			@RequestParam("termin1") LocalDate termin1,
-			@RequestParam("termin2") LocalDate termin2, 
+			@RequestParam("termin1") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate termin1,
+			@RequestParam("termin2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate termin2, 
 			@PathVariable("companyId") Integer companyId) {
 		return appointmentService.listTotalCompanyAppointments(termin1, termin2, companyId);
 
