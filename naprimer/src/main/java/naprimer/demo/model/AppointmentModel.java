@@ -3,11 +3,15 @@ package naprimer.demo.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+
+
 public class AppointmentModel {
 	private Integer id;
 	private LocalDate termin;
 	private LocalTime pocetak;
 	private LocalTime kraj;
+	private Integer kompanijaId; 
+	
 	public Integer getId() {
 		return id;
 	}
@@ -31,6 +35,12 @@ public class AppointmentModel {
 	}
 	public void setKraj(LocalTime kraj) {
 		this.kraj = kraj;
+	}
+	public Integer getKompanijaId() {
+		return kompanijaId;
+	}
+	public void setKompanijaId(Integer kompanijaId) {
+		this.kompanijaId = kompanijaId;
 	}
 
 }

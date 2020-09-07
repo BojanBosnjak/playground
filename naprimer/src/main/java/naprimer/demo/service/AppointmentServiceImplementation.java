@@ -9,14 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import naprimer.demo.entity.Appointment;
+import naprimer.demo.entity.Company;
 import naprimer.demo.exception.ResourceNotFoundException;
 import naprimer.demo.model.AppointmentModel;
 import naprimer.demo.repository.AppointmentRepository;
+import naprimer.demo.repository.CompanyRepository;
 
 @Service
 public class AppointmentServiceImplementation implements AppointmentService {
 	@Autowired
 	private AppointmentRepository appointmentRepository;
+	
+	@Autowired
+	private CompanyRepository companyRepository;
 /*Create, Update, Delete actions over Appointment*/
 	@Override
 	public AppointmentModel createAppointment(AppointmentModel model) {
@@ -25,10 +30,20 @@ public class AppointmentServiceImplementation implements AppointmentService {
 		appointment.setTermin(model.getTermin());
 		appointment.setPocetak(model.getPocetak());
 		appointment.setKraj(model.getKraj());
+		Company company = companyRepository.findById(model.getKompanijaId())
+				.orElseThrow(()->new ResourceNotFoundException());
+		appointment.setCompany(company);
+		
 		appointmentRepository.save(appointment);
 		return appointmentToModel(appointment);
 	}
 
+	/**Ovo je za postman
+	 * { termin:...,
+	 *  kompanija: {id: ....}, prosledjujem obejakt u postman-u
+	 * }
+	 * 
+	 */
 	@Override
 	public AppointmentModel updateAppointment(Integer appointmentId, AppointmentModel model) {
 		Optional<Appointment> theAppointment = appointmentRepository.findById(appointmentId);

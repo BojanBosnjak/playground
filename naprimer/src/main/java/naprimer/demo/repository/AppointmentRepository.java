@@ -39,4 +39,11 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 /*List of user Appointments*/
 	@Query("select a from Appointment a where a.user.userId=:userId")
 	List<Appointment> getUsersAppointments (Integer userId);
+
+	@Query("select a from Appointment a join a.company c where a.termin between (:termin1, :termin2) and c.id=:companyId")
+	List<Appointment> listTotalCompanyAppointments234(LocalDate termin1, LocalDate termin2, Integer companyId);
+	
+	List<Appointment> findByTerminBetween(LocalDate termin1, LocalDate termin2);
+
+	
 }
