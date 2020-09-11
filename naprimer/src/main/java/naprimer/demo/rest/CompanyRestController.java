@@ -31,6 +31,11 @@ public class CompanyRestController {
 		return companyService.getCompanyById(companyId);
 	}
 	
+	@GetMapping("/companies/name/{name}")
+	public CompanyModel getCompanyByName(@PathVariable ("name") String name) {
+		return companyService.findByName(name);
+	}
+	
 	@PostMapping("/create")
 	public CompanyModel saveCompany (@Valid @RequestBody CompanyModel comapny) {
 		return companyService.saveCompany(comapny);

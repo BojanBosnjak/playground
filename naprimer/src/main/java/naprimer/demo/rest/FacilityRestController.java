@@ -31,6 +31,9 @@ public class FacilityRestController {
 		return facilityService.findById(facilityId);
 	}
 	
+	/*Find facility by name
+	 */
+	
 	@GetMapping("/facilities/company/{companyId}")
 	public List<FacilityModel> getCompanyFacility(@PathVariable ("companyId") Integer companyId){
 		return facilityService.getCompanyFacility(companyId);

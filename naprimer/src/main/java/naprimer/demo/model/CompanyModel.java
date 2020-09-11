@@ -5,6 +5,7 @@ public class CompanyModel {
 	private String name;
 	private final int authority = 1;
 	private EmployeeModel employeeModel;
+	
 	public Integer getId() {
 		return id;
 	}

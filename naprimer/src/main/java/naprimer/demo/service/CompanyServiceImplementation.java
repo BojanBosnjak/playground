@@ -61,6 +61,15 @@ public class CompanyServiceImplementation implements CompanyService {
 		}
 		return companyToModel(theCompany.get());
 	}
+	
+	@Override
+	public CompanyModel findByName(String name) {
+		Optional <Company> theCompany = companyRepository.findByName(name);
+		if(theCompany.isEmpty()) {
+			throw new ResourceNotFoundException("Company not found");
+		}
+		return companyToModel(theCompany.get());
+	}
 
 	@Override
 	public List<CompanyModel> getAllCompanies() {
@@ -90,5 +99,6 @@ public class CompanyServiceImplementation implements CompanyService {
 		companyModel.setName(company.getName());
 		return companyModel;
 	}
+
 
 }

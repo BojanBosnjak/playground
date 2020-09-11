@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import naprimer.demo.entity.Authority;
 import naprimer.demo.entity.Company;
 import naprimer.demo.entity.Employee;
 import naprimer.demo.exception.ResourceNotFoundException;
@@ -99,11 +100,12 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		employeeRepository.updateEmployeeCompany(employeeId, model.getCompany());
 	}
 	
-	private EmployeeModel employeeToModel(Employee employee) {
+	private EmployeeModel employeeToModel(Employee employee/*, int companyId, int authority*/) {
 		EmployeeModel employeeModel = new EmployeeModel();
 		employeeModel.setId(employee.getEmployeeId());
 		employeeModel.setName(employee.getName());
-		//employeeModel.setAuthority(employee.getAuthority());
+		employeeModel.setAuthority(employee.getAuthority().getId());
+		employeeModel.setCompany(employee.getCompany().getCompanyId());
 		return employeeModel;
 	}
 
